@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+data:
+  nginx.config: |
+    events {
+      worker_connections 1024;
+    }
+
+    http {
+      server {
+        listen 80;
+        server_name fe.10mindesigns.shop;
+
+        location / {
+          proxy_pass http://web.default.svc.cluster.10MinDesign:3000;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+        } 
+      }
+
+      server {
+        listen 80;
+        server_name be.10mindesigns.shop;
+
+        location / {
+          proxy_pass http://backend-auth.default.svc.cluster.10MinDesign:8080;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection 'upgrade';
+          proxy_set_header Host $host;
+          proxy_cache_bypass $http_upgrade;
+        } 
+      }
+    }  
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ingress-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ingress-proxy
+  template:
+    metadata:
+      labels:
+        app: ingress-proxy          
+    spec:
+      containers:
+        - name: ingress-proxy
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name:       
+
+
+
+
+--- 
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ingress-proxy-service
+spec:
+  selector:
+    app: ingress-proxy
+  ports:
+   - protocol: TCP
+     port: 80
+     targetPort: 80
+  type: LoadBalencer        
