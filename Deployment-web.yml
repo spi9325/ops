@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  - name: web
+   name: web
 spec:
   replicas: 1
   selector:
@@ -17,7 +17,9 @@ spec:
           image: spi9325/web:1
           ports:
             - containerPort: 3000
-
+          envFrom:
+            - secretRef:
+                name: web-secret
 
 ---
 

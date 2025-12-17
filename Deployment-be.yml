@@ -17,7 +17,9 @@ spec:
           image: spi9325/backend-auth:1
           ports:
             - containerPort: 8080
-
+          envFrom:
+            - secretRef:
+                name: backend-auth-secret
 
 ---
 
