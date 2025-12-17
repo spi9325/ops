@@ -1,37 +1,37 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: backend-auth
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: backend-auth
-#   template:
-#     metadata:
-#       labels:
-#         app: backend-auth
-#     spec:
-#       containers:
-#         - name: backend-auth
-#           image: spi9325/backend-auth:1
-#           ports:
-#             - containerPort: 8080
-#           envFrom:
-#             - secretRef:
-#                 name: backend-auth-secret
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-auth
+  template:
+    metadata:
+      labels:
+        app: backend-auth
+    spec:
+      containers:
+        - name: backend-auth
+          image: spi9325/backend-auth:1
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: backend-auth-secret
 
-# ---
+---
 
-# apiVersion: v1
-# kind: Service
-# metadata:
-#   name: backend-auth-service
-# spec:
-#   selector:
-#     app: backend-auth
-#   ports:
-#     - protocol: TCP
-#       port: 80
-#       targetPort: 8080
-#   type: ClusterIp      
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-auth-service
+spec:
+  selector:
+    app: backend-auth
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP      
