@@ -11,10 +11,10 @@ data:
     http {
       server {
         listen 80;
-        server_name fe.10mindesigns.shop;
+        server_name a476562c0e82944cfa41b372c70c5cae-48167472.ap-south-1.elb.amazonaws.com;
 
         location / {
-          proxy_pass http://web-service.default.svc.cluster.local:3000;
+          proxy_pass http://web-service.default.svc.cluster.sanket:3000;
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection 'upgrade';
