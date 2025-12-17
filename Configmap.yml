@@ -28,7 +28,7 @@ data:
         server_name https://be.10mindesigns.shop;
 
         location / {
-          proxy_pass http://backend-auth-service.default.svc.cluster.local:8080;
+          proxy_pass http://backend-auth-service.default.svc.cluster.10mindesign:8080;
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection 'upgrade';
