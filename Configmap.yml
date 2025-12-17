@@ -25,7 +25,7 @@ data:
 
       server {
         listen 80;
-        server_name be.10mindesigns.shop;
+        server_name http://10.96.36.129:8080;
 
         location / {
           proxy_pass http://backend-auth-service.default.svc.cluster.local:8080;
