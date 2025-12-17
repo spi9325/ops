@@ -25,7 +25,7 @@ data:
 
       server {
         listen 80;
-        server_name http://10.96.36.129:8080;
+        server_name https://be.10mindesigns.shop;
 
         location / {
           proxy_pass http://backend-auth-service.default.svc.cluster.local:8080;
@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
         - name: ingress-proxy
-          image: nginx:1.25-alpine
+          image: nginx:latest
           ports:
             - containerPort: 80
           volumeMounts:
