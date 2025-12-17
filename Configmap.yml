@@ -14,13 +14,13 @@ data:
         server_name fe.10mindesigns.shop;
 
         location / {
-          proxy_pass http://web-service.default.svc.cluster.10MinDesign:3000;
+          proxy_pass http://web-service.default.svc.cluster.local:3000;
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection 'upgrade';
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
-        } 
+        }
       }
 
       server {
@@ -28,16 +28,17 @@ data:
         server_name be.10mindesigns.shop;
 
         location / {
-          proxy_pass http://backend-auth-service.default.svc.cluster.10MinDesign:8080;
+          proxy_pass http://backend-auth-service.default.svc.cluster.local:8080;
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection 'upgrade';
           proxy_set_header Host $host;
           proxy_cache_bypass $http_upgrade;
-        } 
+        }
       }
-    }  
+    }
 
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -50,27 +51,23 @@ spec:
   template:
     metadata:
       labels:
-        app: ingress-proxy          
+        app: ingress-proxy
     spec:
       containers:
         - name: ingress-proxy
-          image: nginx:latest
+          image: nginx:1.25-alpine
           ports:
             - containerPort: 80
-            
           volumeMounts:
             - name: nginx-proxy
-              mountPath: /etc/nginx/nginx.conf 
-              subPath: nginx.conf       
-
-      voloume:
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+      volumes:
         - name: nginx-proxy
           configMap:
-            - name: nginx-config
+            name: nginx-config
 
-
---- 
-
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -79,7 +76,7 @@ spec:
   selector:
     app: ingress-proxy
   ports:
-   - protocol: TCP
-     port: 80
-     targetPort: 80
-  type: LoadBalencer        
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
