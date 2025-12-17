@@ -25,7 +25,7 @@ data:
 
       server {
         listen 80;
-        server_name a4db1bf952cc54d37b9768f473af505a-1764493735.ap-south-1.elb.amazonaws.com;
+        server_name ac1efa58f2cd14d498dce4cba0ca8721-2129994509.ap-south-1.elb.amazonaws.com;
 
         location / {
           proxy_pass http://backend-auth-service.default.svc.cluster.10mindesign:8080;
