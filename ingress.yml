@@ -6,9 +6,10 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   ingressClassName: nginx
-  tls: 
+  tls:
   - hosts:
     - fee.10mindesigns.shop
+    - bee.10mindesigns.shop
     secretName: tls-secret
 
   rules:

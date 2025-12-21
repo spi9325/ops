@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-auth
-          image: spi9325/backend-auth:8e3afba8208c03edf006ccc7e8ae973b323b0ea8
+          image: spi9325/backend-auth:848ebef9bb74a572ce94ea0a8f3fd561a8bc8f7b
           ports:
             - containerPort: 8080
           envFrom:
