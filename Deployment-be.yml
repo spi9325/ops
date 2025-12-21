@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-auth
+  labels:
+    app: backend-auth
 spec:
   replicas: 1
   selector:
@@ -14,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-auth
-          image: spi9325/backend-auth:1
+          image: spi9325/backend-auth:8e3afba8208c03edf006ccc7e8ae973b323b0ea8
           ports:
             - containerPort: 8080
           envFrom:

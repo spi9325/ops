@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: fee.10mindesigns.shop  
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web-service
+                port:
+                  number: 80 
+                  
+    - host: bee.10mindesigns.shop  
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-auth-service
+                port:
+                  number: 80 

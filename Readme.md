@@ -11,10 +11,10 @@ data:
     http {
       server {
         listen 80;
-        server_name a476562c0e82944cfa41b372c70c5cae-48167472.ap-south-1.elb.amazonaws.com;
+        server_name ab4911499bbe5434ba1c0e6a3bc763e4-285628329.ap-south-1.elb.amazonaws.com;
 
         location / {
-          proxy_pass http://web-service.default.svc.cluster.sanket:3000;
+          proxy_pass http://web-service.default.svc.cluster.local;
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection 'upgrade';
@@ -23,19 +23,6 @@ data:
         }
       }
 
-      server {
-        listen 80;
-        server_name ac1efa58f2cd14d498dce4cba0ca8721-2129994509.ap-south-1.elb.amazonaws.com;
-
-        location / {
-          proxy_pass http://backend-auth-service.default.svc.cluster.10mindesign:8080;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection 'upgrade';
-          proxy_set_header Host $host;
-          proxy_cache_bypass $http_upgrade;
-        }
-      }
     }
 
 ---
