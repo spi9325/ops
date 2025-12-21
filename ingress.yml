@@ -1,15 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+  name: nginx  
 spec:
   ingressClassName: nginx
-  tls: 
-  - hosts:
-    - fee.10mindesigns.shop
-    secretName: web-prod
 
   rules:
     - host: fee.10mindesigns.shop  
