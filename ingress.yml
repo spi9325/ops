@@ -9,7 +9,7 @@ spec:
   tls: 
   - hosts:
     - fee.10mindesigns.shop
-    secretName: tls-secret
+    secretName: letsencrypt-prod
 
   rules:
     - host: fee.10mindesigns.shop  
